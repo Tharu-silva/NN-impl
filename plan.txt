@@ -1,0 +1,36 @@
+Requirements
+ 
+1. A single entry point into the network
+2. Ability to set weights and biases through the entry point (randomise weights)
+3. Ability to perform inference (transform a vector) with input dim to a vector with output dim
+4. Initialise the model with an array containing nodes per layer
+
+
+Plan 
+
+
+Neural_Network Class
+    network vector<vector<Node*>>
+    - Initialise 
+        - Takes a vector of number, where each number  represents the num of nodes at layer i 
+        - Takes two other numbers representing input dim and output dim 
+    
+    - Initalise network 
+        - Build all the Nodes and track them in network
+        - Create all connections
+
+    Inference 
+        - Iterate through the nodes in the first input layer and call contribute(). Do the same for all other layers.
+        - Invariant: To guarntee correctness all the contributions in the previous layer must be completed before any contributions are calculated. 
+        - Iterate over layers 
+            - Iterate over nodes and call contribute 
+
+Network Node class 
+    - Outgoing edges 
+    - Value (the value of the node)
+
+    - contribute()
+        - This function computes and applies the node's contribution to each of its outgoing ngbrs. Contribution = weight * value 
+    
+
+struct Edge
