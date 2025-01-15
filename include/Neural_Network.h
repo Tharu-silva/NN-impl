@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory> 
+#include <cassert>
 #include <Node.h>
 
 typedef std::vector<std::unique_ptr<Node>> layer_t;
@@ -21,6 +22,8 @@ public:
         //Initialise network according to layer sizes
         initialise_network(layer_sizes);
     }
+
+    void run_inference(const std::vector<std::size_t>& inputs);
 
 private:
     std::size_t INPUT_LAYER, OUTPUT_LAYER;

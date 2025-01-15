@@ -26,3 +26,24 @@ void Neural_Network::initialise_network(const std::vector<std::size_t>& layer_si
             curr_node->add_edges(nxt_layer);        
     }
 }
+
+void Neural_Network::run_inference(const std::vector<std::size_t>& inputs)
+{
+    assert(inputs.size() == input_dim && "Inputs incorrect size");
+
+    //Iterate over first layer, set values of inputs and call contribute on input nodes
+    for (int i = 0; i < input_dim; ++i)
+    {
+        node_t& input_node {m_network[INPUT_LAYER][i]};
+        input_node->add_value(inputs[i]);
+        input_node->contribute(); 
+    }
+
+    //Iterate over other layers but output layer
+    for (int i = 1; i < n_layers - 1; ++i)
+    {
+        layer_t& layer = m_network[i];
+        for (const auto& node: layer)
+            node->contribute();
+    }   
+}
